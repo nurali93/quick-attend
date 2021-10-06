@@ -1,19 +1,19 @@
 import type { NextPage } from "next";
-import { signIn, signOut, useSession } from "next-auth/client";
-import Layout from "../components/Layout";
+import { signIn, signOut, useSession } from 'next-auth/react';
+import Layout from 'components/Layout';
 
 const Home: NextPage = () => {
-  const [session, loading] = useSession();
+  const { data: session, status } = useSession();
   console.log(session);
   return (
     <Layout>
-      {loading && <p>Loading..</p>}
+      {status === 'loading' && <p>Loading..</p>}
       {!session && (
         <>
           Not signed in <br />
           <button
             onClick={() =>
-              signIn("google", { callbackUrl: "http://localhost:3000/main" })
+              signIn('google', { callbackUrl: 'http://localhost:3000/main' })
             }
           >
             Sign in
