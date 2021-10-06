@@ -1,7 +1,7 @@
 
-import { getSession } from "next-auth/client";
-import User from "../../../models/User";
-import dbConnect from "../../../lib/mongodb";
+import { getSession } from 'next-auth/react';
+import User from 'models/User';
+import dbConnect from 'lib/mongooseClient';
 
 export default async function getUsers(req, res) {
   const user = await getSession({ req });
