@@ -12,8 +12,13 @@ export default async function handler(req, res) {
       }),
     ],
     adapter: MongoDBAdapter({
-      db: await (await dbConnect()).db(),
+      db: await(await dbConnect()).db(),
     }),
+    callbacks: {
+      async session({ session, token, user }) {
+        return { ...session, user: { ...session.user, ...token, ...user } };
+      },
+    },
     secret: process.env.SECRET,
     session: {
       jwt: true,
